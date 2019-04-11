@@ -124,10 +124,10 @@ public class WordsPaginator implements Paginator {
 
     @Override
     public void remove(int pageIndex) {
-        int i = (pageIndex-1)*pageSize;
+        int parola = (pageIndex-1)*pageSize;
         for (int j = 0; j < pageItemCount(pageIndex); j++) {
             elements.remove(j);
-            ++i;
+            ++parola;
         }
     }
 }
