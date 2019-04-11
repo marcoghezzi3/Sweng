@@ -3,6 +3,7 @@ package it.unimi.di.se.lab05;
 
 public class WordsPaginator implements Paginator {
     private static final String ERROR_MESSAGE = "Il valore assegnato al parametro pageSize non è valido.";
+    private static final int PAGE_SIZE = 4;
     private String[] elements;
     private int pageSize;
 
@@ -14,7 +15,7 @@ public class WordsPaginator implements Paginator {
     }
 
     public WordsPaginator(String[] elements) {
-        this(elements, 4);
+        this(elements, PAGE_SIZE);
     }
 
     @Override
