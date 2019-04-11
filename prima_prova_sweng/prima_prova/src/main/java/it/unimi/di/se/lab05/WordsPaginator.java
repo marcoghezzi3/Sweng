@@ -6,6 +6,8 @@ public class WordsPaginator implements Paginator {
     private int pageSize;
 
     public WordsPaginator(String[] elements, int pageSize) {
+        if (pageSize<=0)
+            throw new IllegalArgumentException("Il valore assegnato al parametro pageSize non è valido.");
         this.elements = elements;
         this.pageSize = pageSize;
     }
