@@ -1,6 +1,10 @@
 package it.unimi.di.se.lab05;
 
 
+import java.io.IOException;
+import java.io.Reader;
+import java.util.Arrays;
+
 public class WordsPaginator implements Paginator {
     private static final String ERROR_MESSAGE = "Il valore assegnato al parametro pageSize non è valido.";
     private static final int PAGE_SIZE = 4;
@@ -16,6 +20,24 @@ public class WordsPaginator implements Paginator {
 
     public WordsPaginator(String[] elements) {
         this(elements, PAGE_SIZE);
+    }
+
+    public WordsPaginator(Reader reader, int pageSize) throws IOException {
+        StringBuilder inputReader = getString(reader);
+        String s = inputReader.toString();
+        String regex="[ \n]";
+        this.elements = s.split(regex);
+        this.pageSize = pageSize;
+    }
+
+    private StringBuilder getString(Reader reader) throws IOException {
+        StringBuilder sb = new StringBuilder();
+        while (reader.ready()) {
+            char ch = (char)reader.read();
+            sb.append(ch);
+        }
+        reader.close();
+        return sb;
     }
 
     @Override
