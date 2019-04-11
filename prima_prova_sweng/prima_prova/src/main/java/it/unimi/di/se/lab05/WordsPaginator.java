@@ -7,12 +7,12 @@ public class WordsPaginator implements Paginator {
 
     @Override
     public int pageCount() {
-        return 1;
+        return 0;
     }
 
     @Override
     public int itemCount() {
-        return 1;
+        return 0;
     }
 
     @Override
