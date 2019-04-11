@@ -8,6 +8,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.Timeout;
 
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
 
@@ -87,7 +88,7 @@ public class PaginatorTest {
 	}
 
 	@Test
-	public void readerConstructorTest() {
+	public void readerConstructorTest() throws IOException {
 		Reader resourceReader = new InputStreamReader(getClass().getResourceAsStream("/input_example.txt"));
 		Paginator paginator = new WordsPaginator(resourceReader, 5);
 		assertThat(paginator.toString()).isEqualTo("1: Lorem ipsum dolor sit amet\n" +
