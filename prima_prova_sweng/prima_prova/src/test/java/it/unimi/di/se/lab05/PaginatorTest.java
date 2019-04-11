@@ -2,6 +2,7 @@ package it.unimi.di.se.lab05;
 
 import static org.assertj.core.api.Assertions.*;
 
+
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Rule;
@@ -11,6 +12,7 @@ import org.junit.rules.Timeout;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.io.StringReader;
 
 
 public class PaginatorTest {
@@ -96,6 +98,14 @@ public class PaginatorTest {
 				"3: tincidunt leo nec facilisis Morbi\n" +
 				"4: elit arcu vestibulum non ante\n" +
 				"5: at, venenatis faucibus odio");
+	}
+
+	@Test
+	public void readerStopWordsTest() throws IOException{
+		Reader resourceReader = new InputStreamReader(getClass().getResourceAsStream("/input_example_2.txt"));
+		Paginator paginator = new WordsPaginator(resourceReader, new String[] {"sit", "elit"}, 5);
+		assertThat(paginator.toString()).isEqualTo("1: Lorem ipsum dolor amet ,\n" +
+				"2: consectetur adipiscing .");
 
 	}
 }
