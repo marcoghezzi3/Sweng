@@ -39,6 +39,14 @@ public class WordsPaginator implements Paginator {
         String[] parole = s.split(regex);
         this.elements = new ArrayList<>(Arrays.asList(parole));
         System.out.println(elements.toString());
+        removeStopWords(stopWords);
+        System.out.println(elements.toString());
+
+        this.pageSize = pageSize;
+
+    }
+
+    private void removeStopWords(String[] stopWords) {
         for (int i = 0; i < elements.size(); i++) {
             for (int j = 0; j < stopWords.length; j++) {
                 if (stopWords[j].equals(elements.get(i)) ) {
@@ -47,10 +55,6 @@ public class WordsPaginator implements Paginator {
                 }
             }
         }
-        System.out.println(elements.toString());
-
-        this.pageSize = pageSize;
-
     }
 
     private String getString(Reader reader) throws IOException {
