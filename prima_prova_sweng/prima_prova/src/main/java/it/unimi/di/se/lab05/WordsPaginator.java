@@ -13,6 +13,10 @@ public class WordsPaginator implements Paginator {
         this.pageSize = pageSize;
     }
 
+    public WordsPaginator(String[] elements) {
+
+    }
+
     @Override
     public int pageCount() {
         int count = 0;

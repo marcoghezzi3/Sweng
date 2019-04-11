@@ -49,4 +49,15 @@ public class PaginatorTest {
 				.isInstanceOf(IllegalArgumentException.class)
 				.hasMessageContaining("Il valore assegnato al parametro pageSize non è valido.");
 	}
+
+	@Test
+	public void defaultConstructorTest() {
+		Paginator paginator = new WordsPaginator(new String[]{"Lorem", "ipsum", "dolor", "sit", "amet"});
+		assertThat(paginator.pageCount()).isEqualTo(2);
+		assertThat(paginator.itemCount()).isEqualTo(5);
+		assertThat(paginator.pageItemCount(1)).isEqualTo(4);
+		assertThat(paginator.pageItemCount(2)).isEqualTo(1);
+		assertThat(paginator.pageItemCount(10)).isEqualTo(-1);
+
+	}
 }
