@@ -1,18 +1,22 @@
 package it.unimi.di.se.lab05;
 
+
 public class WordsPaginator implements Paginator {
     private String[] elements;
     private int pageSize;
 
     public WordsPaginator(String[] elements, int pageSize) {
-
         this.elements = elements;
         this.pageSize = pageSize;
     }
 
     @Override
     public int pageCount() {
-        return 0;
+        int count = 0;
+        if (elements.length%pageSize!=0)
+            count+=1;
+        count += elements.length/pageSize;
+        return count;
     }
 
     @Override
