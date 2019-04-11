@@ -16,8 +16,11 @@ public class PaginatorTest {
 
 
 	@Test
-	public void toBeImplementedTest() {
-		fail("Not yet implemented.");
+	public void noElementsTest() {
+		Paginator paginator = new WordsPaginator(new String[]{}, 2);
+		assertThat(paginator.pageCount()).isEqualTo(0);
+		assertThat(paginator.itemCount()).isEqualTo(0);
+		//fail("Not yet implemented.");
 	}
 
 }
