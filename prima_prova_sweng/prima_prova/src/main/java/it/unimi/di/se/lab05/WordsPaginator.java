@@ -14,7 +14,7 @@ public class WordsPaginator implements Paginator {
     }
 
     public WordsPaginator(String[] elements) {
-
+        this(elements, 4);
     }
 
     @Override
