@@ -59,15 +59,15 @@ public class WordsPaginator implements Paginator {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
+        StringBuilder output = new StringBuilder();
         for (int i = 1; i <= pageCount(); i++) {
-            sb.append(i).append(":");
-            sb.append(" ").append(page(i));
+            output.append(i).append(":");
+            output.append(" ").append(page(i));
             if (i!=pageCount())
-                sb.append("\n");
+                output.append("\n");
 
         }
-        return sb.toString();
+        return output.toString();
     }
 
     @Override
