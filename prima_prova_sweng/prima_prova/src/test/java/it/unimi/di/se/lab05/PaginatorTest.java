@@ -16,8 +16,48 @@ public class PaginatorTest {
 
 
 	@Test
-	public void toBeImplementedTest() {
-		fail("Not yet implemented.");
+	public void noElementsTest() {
+		Paginator paginator = new WordsPaginator(new String[]{}, 2);
+		assertThat(paginator.pageCount()).isEqualTo(0);
+		assertThat(paginator.itemCount()).isEqualTo(0);
+		//fail("Not yet implemented.");
 	}
 
+	@Test
+	public void constructorTest() {
+		Paginator paginator = new WordsPaginator(new String[]{"Lorem", "ipsum", "dolor", "sit", "amet"}, 2);
+		assertThat(paginator.pageCount()).isEqualTo(3);
+		assertThat(paginator.itemCount()).isEqualTo(5);
+	}
+
+	@Test
+	public void pageItemCountTest() {
+		Paginator paginator = new WordsPaginator(new String[]{"Lorem", "ipsum", "dolor", "sit", "amet"}, 2);
+		assertThat(paginator.pageCount()).isEqualTo(3);
+		assertThat(paginator.itemCount()).isEqualTo(5);
+		assertThat(paginator.pageItemCount(1)).isEqualTo(2);
+		assertThat(paginator.pageItemCount(3)).isEqualTo(1);
+		assertThat(paginator.pageItemCount(0)).isEqualTo(-1);
+		assertThat(paginator.pageItemCount(10)).isEqualTo(-1);
+	}
+
+	@Test
+	public void illegalArgumentTest() {
+		assertThatThrownBy(() -> {
+			Paginator paginator = new WordsPaginator(new String[]{"ciao", "miao"}, -1);
+		})
+				.isInstanceOf(IllegalArgumentException.class)
+				.hasMessageContaining("Il valore assegnato al parametro pageSize non è valido.");
+	}
+
+	@Test
+	public void defaultConstructorTest() {
+		Paginator paginator = new WordsPaginator(new String[]{"Lorem", "ipsum", "dolor", "sit", "amet"});
+		assertThat(paginator.pageCount()).isEqualTo(2);
+		assertThat(paginator.itemCount()).isEqualTo(5);
+		assertThat(paginator.pageItemCount(1)).isEqualTo(4);
+		assertThat(paginator.pageItemCount(2)).isEqualTo(1);
+		assertThat(paginator.pageItemCount(10)).isEqualTo(-1);
+
+	}
 }
