@@ -26,7 +26,16 @@ public class WordsPaginator implements Paginator {
 
     @Override
     public int pageItemCount(int pageIndex) {
-        return 0;
+        if (checkPageIndex(pageIndex)) return -1;
+        if (pageIndex==pageCount())
+            return elements.length%pageSize;
+        return pageSize;
+    }
+
+    private boolean checkPageIndex(int pageIndex) {
+        if (pageIndex<=0 || pageIndex>pageCount())
+            return true;
+        return false;
     }
 
     @Override

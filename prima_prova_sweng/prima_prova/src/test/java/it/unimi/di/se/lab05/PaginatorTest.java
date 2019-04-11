@@ -29,4 +29,15 @@ public class PaginatorTest {
 		assertThat(paginator.pageCount()).isEqualTo(3);
 		assertThat(paginator.itemCount()).isEqualTo(5);
 	}
+
+	@Test
+	public void pageItemCountTest() {
+		Paginator paginator = new WordsPaginator(new String[]{"Lorem", "ipsum", "dolor", "sit", "amet"}, 2);
+		assertThat(paginator.pageCount()).isEqualTo(3);
+		assertThat(paginator.itemCount()).isEqualTo(5);
+		assertThat(paginator.pageItemCount(1)).isEqualTo(2);
+		assertThat(paginator.pageItemCount(3)).isEqualTo(1);
+		assertThat(paginator.pageItemCount(0)).isEqualTo(-1);
+		assertThat(paginator.pageItemCount(10)).isEqualTo(-1);
+	}
 }
