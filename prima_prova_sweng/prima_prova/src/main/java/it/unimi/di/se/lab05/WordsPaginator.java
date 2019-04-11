@@ -48,7 +48,13 @@ public class WordsPaginator implements Paginator {
 
     @Override
     public String page(int pageIndex) {
-        return null;
+        StringBuilder output = new StringBuilder();
+        int parola = (pageIndex-1)*pageSize;
+        for (int j = 0; j < pageItemCount(pageIndex); j++) {
+            output.append(elements[parola]).append(" ");
+            parola++;
+        }
+        return output.toString().trim();
     }
 
     @Override
