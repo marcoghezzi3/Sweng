@@ -72,7 +72,7 @@ public class WordsPaginator implements Paginator {
 
     @Override
     public String upperCasePage(int pageIndex) {
-        return null;
+        return page(pageIndex).toUpperCase();
     }
 
     @Override

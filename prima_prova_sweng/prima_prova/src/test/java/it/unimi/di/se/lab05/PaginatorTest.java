@@ -76,4 +76,10 @@ public class PaginatorTest {
 				"2: sit amet consectetur\n" +
 				"3: adipiscing");
 	}
+
+	@Test
+	public void upperCaseTest() {
+		Paginator paginator = new WordsPaginator(new String[]{"Lorem", "ipsum", "dolor", "sit", "amet", "consectetur", "adipiscing"}, 3);
+		assertThat(paginator.upperCasePage(2)).isEqualTo("SIT AMET CONSECTETUR");
+	}
 }
