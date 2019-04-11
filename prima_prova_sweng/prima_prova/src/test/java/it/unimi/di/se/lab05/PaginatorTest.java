@@ -8,6 +8,9 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.Timeout;
 
+import java.io.InputStreamReader;
+import java.io.Reader;
+
 
 public class PaginatorTest {
 
@@ -81,5 +84,17 @@ public class PaginatorTest {
 	public void upperCaseTest() {
 		Paginator paginator = new WordsPaginator(new String[]{"Lorem", "ipsum", "dolor", "sit", "amet", "consectetur", "adipiscing"}, 3);
 		assertThat(paginator.upperCasePage(2)).isEqualTo("SIT AMET CONSECTETUR");
+	}
+
+	@Test
+	public void readerConstructorTest() {
+		Reader resourceReader = new InputStreamReader(getClass().getResourceAsStream("/input_example.txt"));
+		Paginator paginator = new WordsPaginator(resourceReader, 5);
+		assertThat(paginator.toString()).isEqualTo("1: Lorem ipsum dolor sit amet\n" +
+				"2: consectetur adipiscing elit Aenean hendrerit\n" +
+				"3: tincidunt leo nec facilisis Morbi\n" +
+				"4: elit arcu vestibulum non ante\n" +
+				"5: at, venenatis faucibus odio");
+
 	}
 }
