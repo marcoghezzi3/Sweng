@@ -108,4 +108,17 @@ public class PaginatorTest {
 				"2: consectetur adipiscing .");
 
 	}
+
+	@Test
+	public void removePageTest() {
+		Paginator paginator = new WordsPaginator(new String[]{"Lorem", "ipsum", "dolor", "sit", "amet", "consectetur", "adipiscing"}, 2);
+		assertThat(paginator.page(2)).isEqualTo("dolor sit");
+		assertThat(paginator.pageCount()).isEqualTo(4);
+		assertThat(paginator.itemCount()).isEqualTo(7);
+		paginator.remove(2);
+		assertThat(paginator.pageCount()).isEqualTo(3);
+		assertThat(paginator.itemCount()).isEqualTo(5);
+		assertThat(paginator.page(2)).isEqualTo("amet consectetur");
+
+	}
 }
