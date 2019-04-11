@@ -38,9 +38,7 @@ public class WordsPaginator implements Paginator {
         String regex="\\s+|(?=\\p{Punct})|(?<=\\p{Punct})";
         String[] parole = s.split(regex);
         this.elements = new ArrayList<>(Arrays.asList(parole));
-        System.out.println(elements.toString());
         removeStopWords(stopWords);
-        System.out.println(elements.toString());
 
         this.pageSize = pageSize;
 
