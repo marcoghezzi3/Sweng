@@ -40,4 +40,13 @@ public class PaginatorTest {
 		assertThat(paginator.pageItemCount(0)).isEqualTo(-1);
 		assertThat(paginator.pageItemCount(10)).isEqualTo(-1);
 	}
+
+	@Test
+	public void illegalArgumentTest() {
+		assertThatThrownBy(() -> {
+			Paginator paginator = new WordsPaginator(new String[]{"ciao", "miao"}, -1);
+		})
+				.isInstanceOf(IllegalArgumentException.class)
+				.hasMessageContaining("Il valore assegnato al parametro pageSize non è valido.");
+	}
 }
