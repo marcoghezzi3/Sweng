@@ -68,4 +68,12 @@ public class PaginatorTest {
 		assertThat(paginator.page(1)).isEqualTo("Lorem ipsum dolor");
 		assertThat(paginator.page(3)).isEqualTo("adipiscing");
 	}
+
+	@Test
+	public void toStringTest() {
+		Paginator paginator = new WordsPaginator(new String[]{"Lorem", "ipsum", "dolor", "sit", "amet", "consectetur", "adipiscing"}, 3);
+		assertThat(paginator.toString()).isEqualTo("1: Lorem ipsum dolor\n" +
+				"2: sit amet consectetur\n" +
+				"3: adipiscing");
+	}
 }

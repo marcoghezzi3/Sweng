@@ -58,6 +58,19 @@ public class WordsPaginator implements Paginator {
     }
 
     @Override
+    public String toString() {
+        StringBuilder output = new StringBuilder();
+        for (int i = 1; i <= pageCount(); i++) {
+            output.append(i).append(":");
+            output.append(" ").append(page(i));
+            if (i!=pageCount())
+                output.append("\n");
+
+        }
+        return output.toString();
+    }
+
+    @Override
     public String upperCasePage(int pageIndex) {
         return null;
     }
