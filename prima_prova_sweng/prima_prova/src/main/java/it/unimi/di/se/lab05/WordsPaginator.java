@@ -23,16 +23,21 @@ public class WordsPaginator implements Paginator {
     }
 
     public WordsPaginator(Reader reader, int pageSize) throws IOException {
+        StringBuilder inputReader = getString(reader);
+        String s = inputReader.toString();
+        String regex="[ \n]";
+        this.elements = s.split(regex);
+        this.pageSize = pageSize;
+    }
+
+    private StringBuilder getString(Reader reader) throws IOException {
         StringBuilder sb = new StringBuilder();
         while (reader.ready()) {
             char ch = (char)reader.read();
             sb.append(ch);
         }
         reader.close();
-        String s = sb.toString();
-        String regex="[ \n]";
-        this.elements = s.split(regex);
-        this.pageSize = pageSize;
+        return sb;
     }
 
     @Override
