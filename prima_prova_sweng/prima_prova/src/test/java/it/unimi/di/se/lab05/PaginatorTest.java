@@ -23,4 +23,10 @@ public class PaginatorTest {
 		//fail("Not yet implemented.");
 	}
 
+	@Test
+	public void constructorTest() {
+		Paginator paginator = new WordsPaginator(new String[]{"Lorem", "ipsum", "dolor", "sit", "amet"}, 2);
+		assertThat(paginator.pageCount()).isEqualTo(3);
+		assertThat(paginator.itemCount()).isEqualTo(5);
+	}
 }
