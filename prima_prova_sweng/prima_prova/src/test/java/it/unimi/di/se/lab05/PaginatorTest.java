@@ -96,6 +96,14 @@ public class PaginatorTest {
 				"3: tincidunt leo nec facilisis Morbi\n" +
 				"4: elit arcu vestibulum non ante\n" +
 				"5: at, venenatis faucibus odio");
+	}
+
+	@Test
+	public void readerStopWordsTest() throws IOException{
+		Reader resourceReader = new InputStreamReader(getClass().getResourceAsStream("Lorem ipsum dolor sit amet, consectetur adipiscing elit."));
+		Paginator paginator = new WordsPaginator(resourceReader, new String[] {"sit", "ellit"}, 5);
+		assertThat(paginator.toString()).isEqualTo("1: Lorem ipsum dolor amet consectetur\n" +
+				"2: adipiscing");
 
 	}
 }

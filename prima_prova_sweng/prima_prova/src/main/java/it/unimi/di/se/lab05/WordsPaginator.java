@@ -3,18 +3,20 @@ package it.unimi.di.se.lab05;
 
 import java.io.IOException;
 import java.io.Reader;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class WordsPaginator implements Paginator {
     private static final String ERROR_MESSAGE = "Il valore assegnato al parametro pageSize non è valido.";
     private static final int PAGE_SIZE = 4;
-    private String[] elements;
+    private ArrayList<String> elements;
     private int pageSize;
+
 
     public WordsPaginator(String[] elements, int pageSize) {
         if (pageSize<=0)
             throw new IllegalArgumentException(ERROR_MESSAGE);
-        this.elements = elements;
+        this.elements = new ArrayList<>(Arrays.asList(elements));
         this.pageSize = pageSize;
     }
 
@@ -26,8 +28,19 @@ public class WordsPaginator implements Paginator {
         StringBuilder inputReader = getString(reader);
         String s = inputReader.toString();
         String regex="[ \n]";
-        this.elements = s.split(regex);
+        String[] parole = s.split(regex);
+        this.elements = new ArrayList<>(Arrays.asList(parole));
         this.pageSize = pageSize;
+    }
+
+    public WordsPaginator(Reader reader, String[] stopWords, int pageSize) throws IOException {
+        StringBuilder inputReader = getString(reader);
+        String s = inputReader.toString();
+        String regex="[ \n]";
+        String[] parole = s.split(regex);
+        this.elements = new ArrayList<>(Arrays.asList(parole));
+        this.pageSize = pageSize;
+
     }
 
     private StringBuilder getString(Reader reader) throws IOException {
@@ -43,22 +56,22 @@ public class WordsPaginator implements Paginator {
     @Override
     public int pageCount() {
         int count = 0;
-        if (elements.length%pageSize!=0)
+        if (elements.size()%pageSize!=0)
             count+=1;
-        count += elements.length/pageSize;
+        count += elements.size()/pageSize;
         return count;
     }
 
     @Override
     public int itemCount() {
-        return elements.length;
+        return elements.size();
     }
 
     @Override
     public int pageItemCount(int pageIndex) {
         if (checkPageIndex(pageIndex)) return -1;
         if (pageIndex==pageCount())
-            return elements.length%pageSize;
+            return elements.size()%pageSize;
         return pageSize;
     }
 
@@ -73,7 +86,7 @@ public class WordsPaginator implements Paginator {
         StringBuilder output = new StringBuilder();
         int parola = (pageIndex-1)*pageSize;
         for (int j = 0; j < pageItemCount(pageIndex); j++) {
-            output.append(elements[parola]).append(" ");
+            output.append(elements.get(parola)).append(" ");
             parola++;
         }
         return output.toString().trim();
