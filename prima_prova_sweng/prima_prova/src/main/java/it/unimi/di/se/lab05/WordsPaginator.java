@@ -25,8 +25,7 @@ public class WordsPaginator implements Paginator {
     }
 
     public WordsPaginator(Reader reader, int pageSize) throws IOException {
-        StringBuilder inputReader = getString(reader);
-        String s = inputReader.toString();
+        String s = getString(reader);
         String regex="[ \n]";
         String[] parole = s.split(regex);
         this.elements = new ArrayList<>(Arrays.asList(parole));
@@ -34,23 +33,34 @@ public class WordsPaginator implements Paginator {
     }
 
     public WordsPaginator(Reader reader, String[] stopWords, int pageSize) throws IOException {
-        StringBuilder inputReader = getString(reader);
-        String s = inputReader.toString();
-        String regex="[ \n]";
+
+        String s = getString(reader);
+        String regex="\\s+|(?=\\p{Punct})|(?<=\\p{Punct})";
         String[] parole = s.split(regex);
         this.elements = new ArrayList<>(Arrays.asList(parole));
+        System.out.println(elements.toString());
+        for (int i = 0; i < elements.size(); i++) {
+            for (int j = 0; j < stopWords.length; j++) {
+                if (stopWords[j].equals(elements.get(i)) ) {
+                    elements.remove(i);
+                    i--;
+                }
+            }
+        }
+        System.out.println(elements.toString());
+
         this.pageSize = pageSize;
 
     }
 
-    private StringBuilder getString(Reader reader) throws IOException {
+    private String getString(Reader reader) throws IOException {
         StringBuilder sb = new StringBuilder();
         while (reader.ready()) {
             char ch = (char)reader.read();
             sb.append(ch);
         }
         reader.close();
-        return sb;
+        return sb.toString();
     }
 
     @Override
